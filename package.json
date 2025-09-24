@@ -1,0 +1,28 @@
+{
+  "name": "wp-ai-study-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generate AI-powered Q&A accordions, interactive flashcards, and SEO meta descriptions directly inside WordPress.",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --watch",
+    "build": "cross-env NODE_ENV=production webpack --progress --color"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "core-js": "^3.38.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
+    "mini-css-extract-plugin": "^2.9.1",
+    "postcss": "^8.4.47",
+    "postcss-loader": "^7.3.4",
+    "regenerator-runtime": "^0.14.1",
+    "sass": "^1.79.4",
+    "sass-loader": "^16.0.1",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^6.0.1",
+    "cross-env": "^7.0.3"
+  }
+}

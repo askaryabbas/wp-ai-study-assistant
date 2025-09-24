@@ -1,0 +1,239 @@
+@use '../styles/variables' as *;
+
+/* ===========================
+   Animations
+   =========================== */
+@keyframes wpai-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===========================
+   Hero / Intro
+   =========================== */
+.wpai-hero {
+  box-sizing: border-box;
+  padding: clamp(2rem, 4vw, 4rem) 1rem;
+  background: linear-gradient(135deg, $hero-grad-1 0%, $hero-grad-2 40%, $hero-grad-3 100%);
+  border-bottom: 1px solid #e6e8ee;
+
+  &__inner {
+    max-width: 940px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin: 0 0 .5rem;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: $color-text-primary;
+  }
+
+  &__subtitle {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: $color-text-secondary;
+  }
+}
+
+/* ===========================
+   Results Section
+   =========================== */
+.wpai-results {
+  box-sizing: border-box;
+  padding: 1.25rem 1rem 3rem;
+}
+
+/* ===========================
+   Form
+   =========================== */
+.wpai-form {
+  display: grid;
+  gap: .75rem;
+
+  .wpai-textarea {
+    width: 100%;
+    min-height: 9rem;
+    max-width: 95%;
+    border: 1px solid $border-neutral;
+    border-radius: .75rem;
+    padding: .875rem 1rem;
+    font: inherit;
+    color: $color-text-primary;
+    background: $color-white;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+
+    &:focus {
+      outline: none;
+      border-color: $focus-ring-color;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, .2);
+    }
+  }
+
+  .wpai-actions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+
+  .wpai-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .65rem 1.1rem;
+    border: 1px solid $btn-primary;
+    background: $btn-primary;
+    color: $color-white;
+    border-radius: .65rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow: 0 8px 20px $btn-primary-shadow;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px $btn-primary-shadow-h;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.is-busy {
+      pointer-events: none;
+      opacity: .85;
+
+      .wpai-button__spinner {
+        display: inline-block;
+      }
+    }
+
+    &__spinner {
+      width: 1em;
+      height: 1em;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, .5);
+      border-top-color: $spinner-top-color;
+      display: none;
+      animation: wpai-spin .8s linear infinite;
+    }
+  }
+
+  .wpai-status {
+    color: $color-error;
+    font-size: .95rem;
+  }
+}
+
+/* ===========================
+   Grid
+   =========================== */
+.wpai-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+/* =========================== 3D Flip Cards =========================== */
+.wpai-card {
+  perspective: 1000px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  height: 180px;
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__inner {
+    position: absolute;
+    inset: 0;
+    transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 22px $shadow-card-lg, 0 2px 6px $shadow-card-sm;
+    background: linear-gradient(180deg, #ffffff, $color-surface-invert);
+    border: 1px solid $border-card;
+
+    will-change: transform;
+  }
+
+  &__face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: start;
+    gap: .5rem;
+    padding: 1rem;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    &--front {
+      transform: rotateY(0deg);
+      -webkit-transform: rotateY(0deg);
+
+      .wpai-chip {
+        background: #eef2ff;
+        color: $color-accent-indigo;
+      }
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+
+      background: $color-text-primary;
+      color: $color-surface-invert;
+
+      .wpai-chip {
+        background: #fde68a;
+        color: $color-chip-back-text;
+      }
+    }
+  }
+
+  &.is-flipped {
+    .wpai-card__inner {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .wpai-card__face--back {
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+    }
+  }
+
+  .wpai-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    min-width: 28px;
+    padding: 0 .5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .02em;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+  }
+
+  &__text {
+    font-size: .98rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-y: scroll;
+  }
+}
