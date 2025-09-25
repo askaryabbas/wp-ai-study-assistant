@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php" colors="true" verbose="true">
+  <testsuites>
+    <testsuite name="WP AI Study Assistant">
+      <directory suffix="Test.php">./tests/</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <const name="WP_PHPUNIT__DIR" value="vendor/wp-phpunit/wp-phpunit"/>
+  </php>
+</phpunit>
